@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@+id/launcher_home">
+    <fragment
+        android:id="@+id/launcher_home"
+        android:name="com.ausichenko.navigation.MainFragment"
+        android:label="@string/home"
+        tools:layout="@layout/main_fragment">
+
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/flow_step_one"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flow_step_one"
+        android:name="com.ausichenko.navigation.FlowStepFragment"
+        tools:layout="@layout/flow_step_one_fragment">
+        <argument
+            android:name="step"
+            app:type="integer"
+            android:defaultValue="1" />
+
+        <action
+            android:id="@+id/next_action"
+            app:destination="@+id/flow_step_two" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/flow_step_two"
+        android:name="com.ausichenko.navigation.FlowStepFragment"
+        tools:layout="@layout/flow_step_two_fragment">
+        <argument
+            android:name="step"
+            type="integer"
+            android:defaultValue="2" />
+
+        <action
+            android:id="@+id/next_action"
+            app:popUpTo="@id/launcher_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.ausichenko.navigation.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/shopping_cart"
+        android:name="com.ausichenko.navigation.ShoppingFragment"
+        android:label="fragment_shopping"
+        tools:layout="@layout/fragment_shopping" />
+
+    <fragment
+        android:id="@+id/android"
+        android:name="com.ausichenko.navigation.DeepLinkFragment"
+        android:label="@string/deeplink"
+        tools:layout="@layout/deeplink_fragment">
+        <argument
+            android:name="myarg"
+            android:defaultValue="Android!"/>
+
+        <deepLink app:uri="www.example.com/{myarg}" />
+    </fragment>
+</navigation>
